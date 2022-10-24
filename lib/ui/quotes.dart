@@ -19,7 +19,6 @@ class QuotesPage extends StatefulWidget {
 }
 
 class _QuotesPageState extends State<QuotesPage> {
-
   int _index = 0;
 
   final List<String> _quotes = const [
@@ -64,12 +63,42 @@ class _QuotesPageState extends State<QuotesPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(_quotes[_index]),
-            TextButton.icon(
-              icon: const Icon(Icons.wb_sunny),
-              onPressed: _showQuote,
-              label: const Text("Inspire me."),
-            )
+            Container(
+                width: 350,
+                height: 200,
+                margin: const EdgeInsets.all(30.0),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(14.5)
+                ),
+                child: Center(
+                   child:  Text(_quotes[_index],
+                   style: const TextStyle(
+                     fontSize: 20,
+                     fontStyle: FontStyle.italic,
+                   ),))
+                ),
+            const Divider(
+              thickness: 1.3,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 18.0),
+              child: TextButton.icon(
+                icon: const Icon(
+                  Icons.wb_sunny,
+                  color: Colors.black,
+                ),
+                onPressed: _showQuote,
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateColor.resolveWith(
+                        (states) => Colors.greenAccent.shade700)),
+                label: const Text(
+                  "Inspire me.",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+            const Spacer(),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -78,7 +107,7 @@ class _QuotesPageState extends State<QuotesPage> {
 
   void _showQuote() {
     setState(() {
-      if(_index != (_quotes.length - 1)) {
+      if (_index != (_quotes.length - 1)) {
         _index = _index + 1;
       } else {
         _index = 0;
